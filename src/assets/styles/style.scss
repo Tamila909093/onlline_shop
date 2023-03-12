@@ -1,0 +1,14 @@
+@import 'variables.scss';
+
+.btn {
+  border-radius: $radius;
+  background: #2c3e50;
+  color: #fff;
+  font-size: 14px;
+  padding: $padding 8px;
+  & a, a:hover {
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+  }
+}
