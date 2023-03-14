@@ -1,8 +1,8 @@
 <template>
   <div class="t-cart">
-<div class="btn">
- <a href="t-cart.vue">cart </a>
-</div>
+<!--<div class="btn">-->
+<!-- <a href="t-cart.vue">cart </a>-->
+<!--</div>-->
   </div>
 </template>
 

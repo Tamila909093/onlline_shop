@@ -1,8 +1,12 @@
 <template>
  <div class="t-catalog">
    <div class="t-catalog_list">
-     <t-catalog-item />
-     <t-catalog-item />
+     <t-catalog-item
+     v-for="product in products"
+     :key="product.article"
+     v-bind:product_data="product"
+     @sendArticle="showChildArticleConsole"
+     />
 
    </div>
 
@@ -18,9 +22,41 @@ export default {
   },
   props: {},
   data() {
-    return {}
+    return {
+      products: [
+        {
+          image: "1.jpg",
+          name: "T-shirt 1",
+          price: 2100.234234234,
+          article: "T1",
+          available: true,
+          category: "Men"
+        },
+        {
+          image: "2.jpg",
+          name: "T-shirt 2",
+          price: 3150.12312412,
+          article: "T2",
+          available: true,
+          category: "Women"
+        },
+        {
+          image: "3.jpg",
+          name: "T-shirt 3",
+          price: 4200.51524,
+          article: "T3",
+          available: false,
+          category: "Women"
+        }
+      ]
+    }
   },
-  computed: {}
+  computed: {},
+  methods: {
+    showChildArticleConsole(data) {
+      console.log(data)
+    }
+  }
 }
 </script>
 
@@ -32,6 +68,5 @@ export default {
       justify-content: space-between;
       align-items: center;
     }
-
   }
 </style>
