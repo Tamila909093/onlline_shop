@@ -2,12 +2,11 @@
  <div class="t-catalog">
    <div class="t-catalog_list">
      <t-catalog-item
-     v-for="product in products"
+     v-for="product in PRODUCTS"
      :key="product.article"
      v-bind:product_data="product"
      @sendArticle="showChildArticleConsole"
      />
-
    </div>
 
  </div>
@@ -15,6 +14,8 @@
 
 <script>
 import tCatalogItem from './t-catalog-item'
+import {mapActions, mapGetters} from 'vuex'
+
 export default {
   name: "t-catalog",
   components: {
@@ -23,39 +24,28 @@ export default {
   props: {},
   data() {
     return {
-      products: [
-        {
-          image: "1.jpg",
-          name: "T-shirt 1",
-          price: 2100.234234234,
-          article: "T1",
-          available: true,
-          category: "Men"
-        },
-        {
-          image: "2.jpg",
-          name: "T-shirt 2",
-          price: 3150.12312412,
-          article: "T2",
-          available: true,
-          category: "Women"
-        },
-        {
-          image: "3.jpg",
-          name: "T-shirt 3",
-          price: 4200.51524,
-          article: "T3",
-          available: false,
-          category: "Women"
-        }
-      ]
     }
   },
-  computed: {},
+  computed: {
+    ...mapGetters([
+        'PRODUCTS'
+    ]),
+  },
   methods: {
+    ...mapActions([
+        'GET_PRODUCTS_FROM_API'
+    ]),
     showChildArticleConsole(data) {
       console.log(data)
     }
+  },
+  mounted() {
+    this.GET_PRODUCTS_FROM_API()
+    .then((response) => {
+      if (response.data) {
+        console.log('data arrived!', response.data)
+      }
+    })
   }
 }
 </script>
