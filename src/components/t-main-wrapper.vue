@@ -2,20 +2,27 @@
   <div class="t-main-wrapper">
     <h2> {{title}}</h2>
     <t-catalog />
-<!--    <t-cart />-->
+
+    <t-cart
+        v-if="CART.length"
+        :cart_data="CART"
+
+
+    />
 
   </div>
 </template>
 
 <script>
     import tCatalog from './t-catalog'
-    // import tCart from './t-cart'
+    import {mapGetters} from "vuex";
+    import tCart from './t-cart'
 
     export default {
       name: 't-main-wrapper',
       components: {
         tCatalog,
-        // tCart
+        tCart
       },                             // child for this components
       props: {},                     // прилетает в компонент из родителя
       data() {                       // персональные данные нашего компонента
@@ -23,7 +30,11 @@
           title: 'Catalog'
         }
       },
-      computed: {},                  // вычислительные свойства компонента
+      computed: {
+        ...mapGetters([
+            'CART'
+        ])
+      },                  // вычислительные свойства компонента
       methods: {},                   // click, modal, animation , то что отлавливает действия пользователя
       watch: {},                     // следить за изменением и  что-то делать
       mounted() {}                 // hook  когда компонент полностью загрузится
